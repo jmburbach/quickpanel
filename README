@@ -1,0 +1,21 @@
+Build stand alone 2d panels for FlightGear using Qt/Qml
+
+Usage:
+	quickpanel /path/to/panel/directory
+
+	QuickPanel will look in the panel directory for panel.qml. This is the
+    entry point for your panel.
+
+	QuickPanel will also look in the panel directory for protocol.xml. This
+    is a FlightGear generic protocol definition to be used for communication
+    with FlightGear.
+
+	QuickPanel will parse the protocol file for all properties defined in the
+    chunks under the output of the output section of the protocol. These
+    will be then made available to your Qml via `quickpanel.getProperty(name)'
+    as well as other interfaces (see example panel).
+
+    If your output chunk has a <name> element, that is the name the property
+    will be exposed as in QuickPanel, otherwise it will use the <node> element.
+
+	QuickPanel currently listens for incoming packets on port 7000.
