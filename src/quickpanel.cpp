@@ -48,7 +48,8 @@ QuickPanel::~QuickPanel()
 	delete m_propertyManager;
 }
 
-void QuickPanel::initPanel(const QDir& panelDir)
+void QuickPanel::initPanel(const QDir& panelDir,
+		const QHostAddress& address, unsigned short port)
 {
 	if (!panelDir.exists()) {
 		throw IOError("Not a directory: " + panelDir.path());
@@ -62,8 +63,8 @@ void QuickPanel::initPanel(const QDir& panelDir)
 	}
 
 	m_propertyManager->parseGenericProtocol(protocolPath);
-	m_propertyManager->startListening(QHostAddress::Any, 7000);
-	
+	m_propertyManager->startListening(address, port);
+
 	m_view->rootContext()->setContextProperty("quickpanel", this);
 	m_view->setSource(qmlPath);
 	m_view->show();

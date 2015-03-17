@@ -18,4 +18,5 @@ Usage:
     If your output chunk has a <name> element, that is the name the property
     will be exposed as in QuickPanel, otherwise it will use the <node> element.
 
-	QuickPanel currently listens for incoming packets on port 7000.
+	By default QuickPanel will bind to localhost on port 7000. This can be
+	via command line arguments; see ./quickpanel -h for details.

@@ -19,6 +19,7 @@
 #define __quickpanel_hpp__
 
 #include <QObject>
+#include <QHostAddress>
 
 class QDir;
 class QQuickView;
@@ -36,7 +37,8 @@ class QuickPanel
 	public:
 		~QuickPanel();
 
-		void initPanel(const QDir& panelDir);
+		void initPanel(const QDir& panelDir,
+			const QHostAddress& address, unsigned short port);
 
 		Q_INVOKABLE QObject* getProperty(const QString& path);
 

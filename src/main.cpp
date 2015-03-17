@@ -32,8 +32,23 @@ int main(int argc, char** argv)
 	QApplication app(argc, argv);
 	app.setApplicationName("QuickPanel");
 
+	QCommandLineOption addressOption(
+		QStringList() << "a" << "address",
+		"Address on which to listen. [localhost]",
+		"address",
+		"127.0.0.1"
+	);
+	QCommandLineOption portOption(
+		QStringList() << "p" << "port",
+		"Port on which to listen. [7000]",
+		"port",
+		"7000"
+	);
+
 	QCommandLineParser parser;
 	parser.addHelpOption();
+	parser.addOption(addressOption);
+	parser.addOption(portOption);
 	parser.addPositionalArgument("path", "Path to panel directory");
 	parser.process(app);
 
@@ -47,10 +62,19 @@ int main(int argc, char** argv)
 
 	QDir panelPath(parser.positionalArguments().at(0));
 
+	bool ok;
+	unsigned short port = parser.value(portOption).toUShort(&ok);
+	if (!ok) {
+		std::cerr << "Invalid port number" << std::endl << std::endl;
+		parser.showHelp(1);
+	}
+
+	QHostAddress address(parser.value(addressOption));
+
 	QuickPanel::QuickPanel* panel = QuickPanel::QuickPanel::create();
 
 	try {
-		panel->initPanel(panelPath);
+		panel->initPanel(panelPath, address, port);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
