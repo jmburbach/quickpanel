@@ -28,7 +28,18 @@ Item {
 		x: asi.width + mdi.width
 		scaleFactor: 1.25
 	}
-	
+
+	MP12 {
+		id: mp12;
+		x: asi.width
+		scaleFactor: 1.25
+	}
+	MP34 {
+		id: mp34
+		y: asi.height
+		scaleFactor: 1.25
+	}
+
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {

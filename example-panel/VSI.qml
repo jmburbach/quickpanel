@@ -22,8 +22,8 @@ Item {
 	SharedNeedle {
 		id: vsi_needle;
 		initialRotation: -90.0
-		PropertyInterpolator on needleAngle {
-			propertyName: "vertical_speed_fpm"
+		Interpolation on needleAngle {
+			input: verticalSpeed.value
 			interpolation: [
 				[-6000, -170],
 				[-4000, -125],

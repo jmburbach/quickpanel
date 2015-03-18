@@ -36,6 +36,30 @@
 				<format>%.2f</format>
 				<node>/instrumentation/heading-indicator/indicated-heading-deg</node>
 			</chunk>
+			<chunk>
+				<name>engine1_mp</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[0]/mp-osi</node>
+			</chunk>
+			<chunk>
+				<name>engine2_mp</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[1]/mp-osi</node>
+			</chunk>
+			<chunk>
+				<name>engine3_mp</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[2]/mp-osi</node>
+			</chunk>
+			<chunk>
+				<name>engine4_mp</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[3]/mp-osi</node>
+			</chunk>
 		</output>
 	</generic>
 </PropertyList>

@@ -116,7 +116,7 @@ void PropertyManager::parseGenericChunk(QXmlStreamReader& xml)
 void PropertyManager::startListening(const QHostAddress& address, quint16 port)
 {
 	if (!m_socket->bind(address, port))
-		throw IOError("Unable to bind socket: " + m_socket->errorString());
+		throw IOError("Error binding socket: " + m_socket->errorString());
 	connect(m_socket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
 }
 

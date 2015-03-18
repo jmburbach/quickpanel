@@ -68,6 +68,37 @@ const QVariantList& PropertyInterpolator::getInterpolation() const
 
 void PropertyInterpolator::setInterpolation(const QVariantList& interp)
 {
+	if (interp.size() < 2) {
+		std::cerr 
+			<< "interpolation value must be an array with at least two entries"
+			<< std::endl;
+		return;
+	}
+
+	for (const QVariant& variant : interp) {
+		if (!variant.canConvert<QVariantList>()) {
+			std::cerr <<
+			   	"interpolation value should be an array of two element arrays"
+				<< std::endl;
+			return;
+		}
+		
+		QSequentialIterable iterable = variant.value<QSequentialIterable>();
+		if (iterable.size() != 2) {
+			std::cerr <<
+			   	"interpolation value should be an array of two element arrays"
+				<< std::endl;
+			return;
+		}
+
+		QVariant input = iterable.at(0);
+		QVariant output = iterable.at(1);
+		if (!(input.canConvert<double>() && output.canConvert<double>())) {
+			std::cerr << "interpolation values must be numberic" << std::endl;
+			return;
+		}
+	}
+
 	m_interpolation = interp;
 }
 
@@ -80,6 +111,12 @@ void PropertyInterpolator::handlePropertyValueChanged(const QVariant& newValue)
 {
 	if (!m_qmlProperty.isValid())
 		return;
+
+	if (!newValue.canConvert<double>()) {
+		std::cerr <<
+		   	"Cannot interpolate non numeric values" << std::endl;
+		return;
+	}
 
 	double value = newValue.toDouble();
 	double interpValue = 0;

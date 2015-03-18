@@ -20,8 +20,8 @@ Item {
 	}
 	SharedNeedle {
 		id: asi_needle;
-		PropertyInterpolator on needleAngle {
-			propertyName: 'indicated_airspeed_kt'
+		Interpolation on needleAngle {
+			input: airspeed.value
 			interpolation: [
 				[0, 0],
 				[25, 16],

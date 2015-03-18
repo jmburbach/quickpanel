@@ -25,12 +25,18 @@
 #include "quickpanel.hpp"
 #include "exceptions.hpp"
 #include "propertyinterpolator.hpp"
+#include "valueinterpolator.hpp"
 
 
 int main(int argc, char** argv)
 {
 	QApplication app(argc, argv);
 	app.setApplicationName("QuickPanel");
+
+	qmlRegisterType<QuickPanel::PropertyInterpolator>(
+		"QuickPanel", 1, 0, "PropertyInterpolator");
+	qmlRegisterType<QuickPanel::ValueInterpolator>(
+		"QuickPanel", 1, 0, "Interpolation");
 
 	QCommandLineOption addressOption(
 		QStringList() << "a" << "address",
@@ -57,9 +63,6 @@ int main(int argc, char** argv)
 		parser.showHelp(1);
 	}
 
-	qmlRegisterType<QuickPanel::PropertyInterpolator>(
-		"QuickPanel", 1, 0, "PropertyInterpolator");
-
 	QDir panelPath(parser.positionalArguments().at(0));
 
 	bool ok;
@@ -77,7 +80,7 @@ int main(int argc, char** argv)
 		panel->initPanel(panelPath, address, port);
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << std::endl << e.what() << std::endl << std::endl;
 		return 1;
 	}
 
