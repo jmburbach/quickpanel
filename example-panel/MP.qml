@@ -1,18 +1,8 @@
 import QtQuick 2.3
-
-import "qrc:js/util.js" as Util
+import QtGraphicalEffects 1.0
 import QuickPanel 1.0
 
 Item {
-	property double scaleFactor: 1.0
-	property var interpolation: [
-		[0, -8],
-		[2, -6],
-		[10, 0],
-		[50, 200],
-		[75, 337.5]
-	]
-	
 	width: 256 * scaleFactor
 	height: 256 * scaleFactor
 	
@@ -22,8 +12,21 @@ Item {
 	}
 
 	Image {
-		id: mp_face
+		id: face
 		source: "images/mp/manpress.png"
+	}
+	Image {
+		id: face_lit
+		source: 'images/face-lit.png'
+		opacity: lighting
+	}
+	Blend {
+		width: 256
+		height: 256
+		foregroundSource: face_lit
+		source: face
+		mode: 'lighten'
+		opacity: lighting
 	}
 	SharedNeedle {
 		id: needle2

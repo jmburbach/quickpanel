@@ -60,6 +60,36 @@
 				<format>%.2f</format>
 				<node>/engines/engine[3]/mp-osi</node>
 			</chunk>
+			<chunk>
+				<name>engine1_rpm</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[0]/rpm</node>
+			</chunk>
+			<chunk>
+				<name>engine2_rpm</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[1]/rpm</node>
+			</chunk>
+			<chunk>
+				<name>engine3_rpm</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[2]/rpm</node>
+			</chunk>
+			<chunk>
+				<name>engine4_rpm</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/engines/engine[3]/rpm</node>
+			</chunk>
+			<chunk>
+				<name>panel_lighting</name>
+				<type>float</type>
+				<format>%.2f</format>
+				<node>/controls/lighting/panel-norm</node>
+			</chunk>
 		</output>
 	</generic>
 </PropertyList>

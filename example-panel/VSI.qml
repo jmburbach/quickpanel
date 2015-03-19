@@ -1,11 +1,10 @@
 import QtQuick 2.3
-
-import "qrc:js/util.js" as Util
+import QtGraphicalEffects 1.0
 import QuickPanel 1.0
+
 
 Item {
 	property var verticalSpeed: quickpanel.getProperty('vertical_speed_fpm')
-	property double scaleFactor: 1.0
 
 	width: 256 * scaleFactor
 	height: 256 * scaleFactor
@@ -16,8 +15,21 @@ Item {
 	}
 
 	Image {
-		id: vsi_face
+		id: face
 		source: "images/vsi/vsi.png"
+	}
+	Image {
+		id: face_lit
+		source: 'images/face-lit.png'
+		opacity: lighting
+	}
+	Blend {
+		width: 256
+		height: 256
+		foregroundSource: face_lit
+		source: face
+		mode: 'lighten'
+		opacity: lighting
 	}
 	SharedNeedle {
 		id: vsi_needle;

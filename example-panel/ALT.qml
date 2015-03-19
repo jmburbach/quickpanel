@@ -1,12 +1,10 @@
 import QtQuick 2.3
-
-import "qrc:js/util.js" as Util
+import QtGraphicalEffects 1.0
 import QuickPanel 1.0
 
 Item {
 	property var altitude: quickpanel.getProperty('indicated_altitude_ft')
 	property var pressure: quickpanel.getProperty('altimeter_setting_inhg')
-	property double scaleFactor: 1.0
 
 	width: 256 * scaleFactor
 	height: 256 * scaleFactor
@@ -17,7 +15,12 @@ Item {
 	}
 
 	clip: true
-
+	
+	Image {
+		id: face_lit
+		source: 'images/face-lit.png'
+		opacity: lighting
+	}
 	Image {
 		id: alt_inhg
 		source: 'images/altimeter/altpres.png'
@@ -42,9 +45,26 @@ Item {
 			}
 		]
 	}
+	Blend {
+		width: 256
+		height: 256
+		foregroundSource: face_lit
+		source: alt_inhg
+		mode: 'lighten'
+		opacity: lighting
+	}
+
 	Image {
-		id: alt_face
+		id: face
 		source: 'images/altimeter/alt.png'
+	}
+	Blend {
+		width: 256
+		height: 256
+		foregroundSource: face_lit
+		source: face
+		mode: 'lighten'
+		opacity: lighting
 	}
 	Image {
 		id: alt_needle_10k

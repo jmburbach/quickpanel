@@ -3,19 +3,17 @@ import QtGraphicalEffects 1.0
 import QuickPanel 1.0
 
 Item {
-	property var airspeed: quickpanel.getProperty('indicated_airspeed_kt')
-
 	width: 256 * scaleFactor
 	height: 256 * scaleFactor
-
-	transform: Scale {
+	
+	transform: Scale { 
 		xScale: scaleFactor
-		yScale: scaleFactor
+		yScale: scaleFactor 
 	}
 
 	Image {
 		id: face
-		source: "images/asi/asi.png"
+		source: "images/rpm/rpm.png"
 	}
 	Image {
 		id: face_lit
@@ -31,25 +29,31 @@ Item {
 		opacity: lighting
 	}
 	SharedNeedle {
-		id: asi_needle;
+		id: needle2
+		source: needleSource2
+		initialRotation: -162
 		Interpolation on needleAngle {
-			input: airspeed.value
+			input: rpm2
 			interpolation: [
 				[0, 0],
-				[25, 16],
-				[50, 24.5],
-				[100, 93.5],
-				[150, 139.5],
-				[200, 185.5],
-				[250, 224.5],
-				[300, 263.5],
-				[350, 301.5],
-				[400, 339.5]
+				[4500, 324]
+			]
+		}
+	}
+	SharedNeedle {
+		id: needle1
+		source: needleSource1
+		initialRotation: -162
+		Interpolation on needleAngle {
+			input: rpm1
+			interpolation: [
+				[0, 0],
+				[4500, 324]
 			]
 		}
 	}
 	Text {
-		text: airspeed.value
+		text: rpm1 + "|" + rpm2
 		x: 15
 		y: 15
 		color: '#ffffff'

@@ -4,40 +4,49 @@ Item {
 	width: childrenRect.width
 	height: childrenRect.height
 
+	property var lightingProp: quickpanel.getProperty("panel_lighting")
+	property double lighting: parseFloat(lightingProp.value)
+	property double scaleFactor: 1.25
+
 	ASI {
 		id: asi
-		scaleFactor: 1.25
 	}
 
 	MDI {
 		id: mdi
 		x: asi.width
 		y: asi.height
-		scaleFactor: 1.25;
 	}
 
 	VSI {
 		id: vsi
 		x: asi.width + mdi.width
 		y: asi.height
-		scaleFactor: 1.25
 	}
 
 	ALT {
 		id: alt
 		x: asi.width + mdi.width
-		scaleFactor: 1.25
 	}
 
 	MP12 {
-		id: mp12;
-		x: asi.width
-		scaleFactor: 1.25
+		id: mp12
+		x: alt.x + alt.width
 	}
 	MP34 {
 		id: mp34
-		y: asi.height
-		scaleFactor: 1.25
+		x: mp12.x + mp12.width
+	}
+
+	RPM12 {
+		id: rpm12
+		x: mp12.x
+		y: mp12.y + height
+	}
+	RPM34 {
+		id: rpm34
+		x: rpm12.x + width
+		y: rpm12.y
 	}
 
 	MouseArea {
